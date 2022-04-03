@@ -1,25 +1,30 @@
 import logo from './logo.svg';
-import './App.css';
 
-function App() {
+
+//import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
+import {connect} from "react-redux";
+import Columns from "./Columns";
+import 'bootstrap/dist/css/bootstrap.css'
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+        <div className="container">
+      <h1>Kanban Redux</h1>
+            <div className="row align-items-start">
+
+        {props.statuses.map(el => <Columns key={el.id} status={el}/>)}
+            </div>
+        </div>
+
   );
 }
 
-export default App;
+
+const mapStateToProps = state => ({
+    statuses: state.statuses,
+});
+
+export default connect (mapStateToProps) (App);
+
+
+
