@@ -33,7 +33,12 @@ const Reducer = (state = initialState,action) => {
 switch(action.type){
     case
     'GET_STATUSES':
-        return {...state}
+        return {...state,statuses:action.payload};
+    case
+    'GET_CARDS' :
+        return {...state, tasks:action.payload}
+
+
     default:
         return state;
 }
