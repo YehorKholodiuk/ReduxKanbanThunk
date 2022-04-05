@@ -7,6 +7,7 @@ import Columns from "./Columns";
 import 'bootstrap/dist/css/bootstrap.css'
 import {useEffect} from "react";
 import {getCards, getStatuses} from "./redux/actions";
+import CreateModal from "./CreateModal";
 //import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 function App(props) {
     useEffect(
@@ -20,6 +21,7 @@ function App(props) {
 
         <div className="container">
       <h1>Kanban Redux</h1>
+        <CreateModal/>
             <div className="row align-items-start">
 
         {props.statuses.map(el => <Columns key={el.id} status={el}/>)}
