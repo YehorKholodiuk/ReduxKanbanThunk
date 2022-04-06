@@ -1,8 +1,25 @@
 import React, {useState} from 'react';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
-const CreateModal = () => {
+import {connect} from "react-redux";
+import {createCard} from "./redux/actions";
+
+const CreateModal = (props) => {
     const [isOpen, setIsOpen] = useState(false)
+    const [inputName, setInputName] = useState('')
+    const [inputDescription, setInputDescription] = useState('')
+
+    const onCreateCard = () =>{
+        const newCard ={
+            name:inputName,
+            description:inputDescription,
+            status:'todo',
+            priority: 1,
+        };
+        props.createCard(newCard);
+        toggle()
+    }
+
     const toggle = () =>{
         setIsOpen(!isOpen)
     }
@@ -20,17 +37,28 @@ const CreateModal = () => {
                     isOpen={isOpen}
                 >
                     <ModalHeader toggle={toggle}>
-                        Modal title
+                        Create Task
                     </ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="basic-addon1"></span>
+                            <input type="text" className="form-control" placeholder="Task Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" value= {inputName} onChange = {(e) => setInputName(e.target.value)}/>
+                        </div>
+
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="basic-addon1"></span>
+                            <input type="text" className="form-control" placeholder="Task Description" aria-label="Username"
+                                   aria-describedby="basic-addon1"value= {inputDescription} onChange = {(e) => setInputDescription(e.target.value)}/>
+                        </div>
+
                     </ModalBody>
                     <ModalFooter>
                         <Button
                             color="primary"
-                            onClick={function noRefCheck(){}}
+                            onClick={onCreateCard}
                         >
-                            Do Something
+                            Create Card
                         </Button>
                         {' '}
                         <Button onClick={toggle}>
@@ -43,4 +71,8 @@ const CreateModal = () => {
     );
 };
 
-export default CreateModal;
+const mapDispatchToProps = dispatch =>({
+    createCard: (newCard) => dispatch(createCard(newCard)),
+})
+
+export default connect(null,mapDispatchToProps) (CreateModal);

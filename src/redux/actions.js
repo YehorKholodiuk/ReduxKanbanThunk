@@ -15,6 +15,16 @@ export function getCards(){
     }
 };
 
+export function createCard(newCard){
+    return(dispatch) =>{
+        axios.post('http://nazarov-kanban-server.herokuapp.com/card',newCard)
+            .then(res => {
+                dispatch(getCards())
+            })
+            .catch(err => console.log('error'))
+    }
+}
+
 export function changeStatus(card, statuses, direction) {
     const newStatuses = statuses.map(el => el.title)
     const status = newStatuses[newStatuses.indexOf(card.status)+direction]
