@@ -12,7 +12,9 @@ import {Button} from "reactstrap";
 //import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 function App(props) {
     const [isOpen, setIsOpen] = useState(false)
-    const toggle = () =>{
+    const [modalType,setModalType] = useState('')
+    const toggle = (typeMo, task) =>{
+        setModalType(typeMo)
         setIsOpen(!isOpen)
     }
     useEffect(
@@ -29,11 +31,11 @@ function App(props) {
 
             <Button
                 color="danger"
-                onClick={toggle}
+                onClick={() => toggle('create')}
             >
                 Click Me
             </Button>
-            {isOpen && <CreateModal isOpen={isOpen} toggle={toggle}/>}
+            {isOpen && <CreateModal isOpen={isOpen} toggle={toggle} modalType={modalType}/>}
             <div className="row align-items-start">
 
         {props.statuses.map(el => <Columns key={el.id}

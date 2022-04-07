@@ -31,22 +31,32 @@ const CreateModal = (props) => {
                 isOpen={isOpen}
             >
                 <ModalHeader toggle={toggle}>
-                    Create Task
+                    {props.modalType === 'create' ? 'Create Task': 'Are you sure you want to delete this task ?'}
                 </ModalHeader>
-                <ModalBody>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="basic-addon1"></span>
-                        <input type="text" className="form-control" placeholder="Task Name" aria-label="Username"
-                               aria-describedby="basic-addon1" value= {inputName} onChange = {(e) => setInputName(e.target.value)}/>
-                    </div>
 
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="basic-addon1"></span>
-                        <input type="text" className="form-control" placeholder="Task Description" aria-label="Username"
-                               aria-describedby="basic-addon1"value= {inputDescription} onChange = {(e) => setInputDescription(e.target.value)}/>
-                    </div>
+                { props.modalType === 'create' &&
+                    <ModalBody>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="basic-addon1"></span>
+                            <input type="text" className="form-control" placeholder="Task Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" value= {inputName} onChange = {(e) => setInputName(e.target.value)}/>
+                        </div>
 
-                </ModalBody>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text" id="basic-addon1"></span>
+                            <input type="text" className="form-control" placeholder="Task Description" aria-label="Username"
+                                   aria-describedby="basic-addon1"value= {inputDescription} onChange = {(e) => setInputDescription(e.target.value)}/>
+                        </div>
+
+                    </ModalBody>
+                }
+
+                {
+                    <ModalBody>
+                        <p>{ }</p>
+                    </ModalBody>
+                }
+
                 <ModalFooter>
                     <Button
                         color="primary"
