@@ -36,7 +36,11 @@ function App(props) {
             {isOpen && <CreateModal isOpen={isOpen} toggle={toggle}/>}
             <div className="row align-items-start">
 
-        {props.statuses.map(el => <Columns key={el.id} status={el}/>)}
+        {props.statuses.map(el => <Columns key={el.id}
+                                           status={el}
+                                           //isOpen={isOpen}
+                                           toggle={toggle}
+        />)}
             </div>
         </div>
 

@@ -23,7 +23,7 @@ const Card = (props) => {
                         onClick = {()=> props.changeStatus(props.task,props.statuses,+1)}
                 >right </button>
 
-                <button type="button" className="btn-outline-danger btn-sm">DELETE</button>
+                <button type="button" className="btn-outline-danger btn-sm" onClick={props.toggle}>DELETE</button>
             </div>
         </div>
 
