@@ -5,11 +5,16 @@ import logo from './logo.svg';
 import {connect} from "react-redux";
 import Columns from "./Columns";
 import 'bootstrap/dist/css/bootstrap.css'
-import {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {getCards, getStatuses} from "./redux/actions";
 import CreateModal from "./CreateModal";
+import {Button} from "reactstrap";
 //import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 function App(props) {
+    const [isOpen, setIsOpen] = useState(false)
+    const toggle = () =>{
+        setIsOpen(!isOpen)
+    }
     useEffect(
         () => {props.getStatuses()}, []
     )
@@ -21,7 +26,14 @@ function App(props) {
 
         <div className="container">
       <h1>Kanban Redux</h1>
-        <CreateModal/>
+
+            <Button
+                color="danger"
+                onClick={toggle}
+            >
+                Click Me
+            </Button>
+            {isOpen && <CreateModal isOpen={isOpen} toggle={toggle}/>}
             <div className="row align-items-start">
 
         {props.statuses.map(el => <Columns key={el.id} status={el}/>)}
