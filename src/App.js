@@ -13,7 +13,9 @@ import {Button} from "reactstrap";
 function App(props) {
     const [isOpen, setIsOpen] = useState(false)
     const [modalType,setModalType] = useState('')
+    const [task,setTask] = useState({})
     const toggle = (typeMo, task) =>{
+        setTask(task)
         setModalType(typeMo)
         setIsOpen(!isOpen)
     }
@@ -35,7 +37,7 @@ function App(props) {
             >
                 Click Me
             </Button>
-            {isOpen && <CreateModal isOpen={isOpen} toggle={toggle} modalType={modalType}/>}
+            {isOpen && <CreateModal isOpen={isOpen} toggle={toggle} modalType={modalType} task={task}/>}
             <div className="row align-items-start">
 
         {props.statuses.map(el => <Columns key={el.id}

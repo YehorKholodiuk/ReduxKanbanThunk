@@ -52,8 +52,8 @@ const CreateModal = (props) => {
                 }
 
                 {
-                    <ModalBody>
-                        <p>{ }</p>
+                   props.modalType === 'delete' && <ModalBody>
+                        <p>{props.task.name }</p>
                     </ModalBody>
                 }
 
@@ -62,7 +62,7 @@ const CreateModal = (props) => {
                         color="primary"
                         onClick={onCreateCard}
                     >
-                        Create Card
+                        {props.modalType === 'create' ? 'Create Task': 'delete'}
                     </Button>
                     {' '}
                     <Button onClick={toggle}>
