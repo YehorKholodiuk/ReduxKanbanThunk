@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
 import {connect} from "react-redux";
-import {createCard} from "./redux/actions";
+import {createCard, deleteCard} from "./redux/actions";
 
 const CreateModal = (props) => {
     const {toggle, isOpen} = props;
@@ -19,6 +19,11 @@ const CreateModal = (props) => {
         };
         props.createCard(newCard);
         toggle()
+    }
+
+    const onDelete = () => {
+        props.deleteCard(props.task._id)
+        toggle();
     }
 
 
@@ -60,7 +65,7 @@ const CreateModal = (props) => {
                 <ModalFooter>
                     <Button
                         color="primary"
-                        onClick={onCreateCard}
+                        onClick={props.modalType === 'create'? onCreateCard:onDelete}
                     >
                         {props.modalType === 'create' ? 'Create Task': 'delete'}
                     </Button>
@@ -77,6 +82,7 @@ const CreateModal = (props) => {
 
 const mapDispatchToProps = dispatch =>({
     createCard: (newCard) => dispatch(createCard(newCard)),
+    deleteCard:(id) => dispatch(deleteCard(id))
 })
 
 export default connect(null,mapDispatchToProps) (CreateModal);

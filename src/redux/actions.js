@@ -36,12 +36,13 @@ export function changeStatus(card, statuses, direction) {
 
 }
 
-export function deleteCard (cardId) {
+export function deleteCard (id) {
     return (dispatch) => {
-        axios.delete(`http://nazarov-kanban-server.herokuapp.com/card/${cardId}`)
+        axios.delete(`http://nazarov-kanban-server.herokuapp.com/card/${id}`)
             .then(res => {
                 dispatch(getCards())
             })
             .catch(err => err)
     }
 }
+
